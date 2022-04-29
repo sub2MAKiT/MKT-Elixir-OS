@@ -40,6 +40,13 @@ keyToAl:
     cmp bl, $8
     jne clsLabel
     pop ebx
+    mov bx, sp
+    inc bx
+    inc bx
+    inc bx
+    inc bx
+    cmp bp, bx
+    je clsLabel
     pop ebx
     jmp clsLabel
 
