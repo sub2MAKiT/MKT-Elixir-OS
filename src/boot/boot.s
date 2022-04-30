@@ -1,81 +1,49 @@
-[org 0x7c00]
-mov ah, 0x0e
-; printBootString:
-;     mov al, [bx]
-;     cmp al, 0
-;     je keyToAl
-;     int 0x10
-;     inc bx
-;     jmp printBootString
+[org 0x7c00] ; or mov ds, 0x7c00
+mov si, bootUpString
+mov di, 0
 mov bp, 0x8000
 mov sp, bp
+jmp finishBootUp
 
-jmp keyToAl
+finishBootUp:
+    call printm
+    jmp menu
 
-printString:
-    mov ah, 0x0e
-    mov si, $0
-    jmp printStringLoop
 
-printStringLoop:
-    mov bx, bp
-    inc si
-    inc si   
-    inc si    
-    inc si
-    sub bx, si
-    cmp bx, sp
-    jl keyToAl
-    mov ah, 0x0e
-    mov al, [bx]
-    int 0x10
-    jmp printStringLoop
+menu:
+%include "./src/boot/menu.s"
 
-keyToAl:
-    mov ah, $0
-    int 0x16
-    mov [currentChar], al
-    mov bl, [currentChar]
-    push ebx
-    cmp bl, $8
-    jne clsLabel
-    pop ebx
-    mov bx, sp
-    inc bx
-    inc bx
-    inc bx
-    inc bx
-    cmp bp, bx
-    je clsLabel
-    pop ebx
-    jmp clsLabel
+textEditor:
+%include "./src/optionText/text.s"
 
-printCurrentChar:
-    mov ah, 0x0e
-    mov al, [currentChar]
-    int 0x10
-    jmp keyToAl
 
-end:
+bootUpString db 'Welcome to MAKiT E', 0
 
-clsLabel:
-    call cls
-    jmp printString
-
-cls:
-    pusha
-    mov ah, 0x00
-    mov al, 0x03  ; text mode 80x25 16 colours
-    int 0x10
-    popa
+returnCall:
     ret
 
+printm:
+    mov bx, si
+    add bx, di
+    mov al, [bx]
+    inc di
+    mov bl, [displaymode]
+    cmp al, 0
+    je returnCall
+    mov ah, 0x09            ; int 10h 'print char' function
+    mov bh, 0x00
+    mov cx, 0x01
+    int 0x10
+    mov bh, 0x00
+    mov ah, 0x03
+    int 0x10
+    mov ah, 0x02
+    mov bh, 0x00
+    inc dl
+    int 0x10
+    jmp printm
 
-bootUpString db "Welcome to MAKiT E", 0
-
-
-currentChar:
-    db 0
+exit:
 
 jmp $
 times 510-($-$$) db 0

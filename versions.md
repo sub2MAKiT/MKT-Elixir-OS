@@ -14,3 +14,11 @@
       - Boot up
       - The ability to write
       - The ability to erase
+   6. 0006
+      1. Main
+         - Boot up
+      2. Text editor
+         - The ability to write
+         - The ability to erase
+      3. Basic menu
+         - Added a basic menu
