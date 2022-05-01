@@ -37,15 +37,15 @@ mov bp, 0x8000
 mov sp, bp
 
 mov bx, MKTKERNEL
-mov dh, 22
-mov al, dh 
+mov dh, 24
+
 mov ah, 0x02
+mov al, dh 
 mov ch, 0x00
 mov dh, 0x00
 mov cl, 0x02
 mov dl, [BOOT_DISK]
 int 0x13
-
 
                                     
 mov ah, 0x0
@@ -60,7 +60,7 @@ mov cr0, eax
 jmp CODE_SEG:start_protected_mode
 
 jmp $
-
+                                    
 BOOT_DISK: db 0
 
 %include "./src/boot/gdt.s"

@@ -4,6 +4,8 @@ section .text
     call main
     [extern screenRender]
     call screenRender
+    [extern main]
+    call main
     jmp $
 
 
