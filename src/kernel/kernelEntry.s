@@ -2,15 +2,9 @@ section .text
     [bits 32]
     [extern main]
     call main
-    [extern screenRender]
-    call screenRender
-    [extern main]
-    call main
-    jmp $
+    jmp menu
 
+returnCall:
+    ret
 
-; returnCall:
-;     ret
-
-; %include "./src/boot/options/menu.s"
-; %include "./src/renderBuffer/addToRenderBuffer.s"
+%include "./src/options/menu.s"

@@ -22,3 +22,10 @@
          - The ability to erase
       3. Basic menu
          - Added a basic menu
+   7. 0007
+      1. Main
+         - Boot up
+      2. Kernel
+         - Kernel
+         - MKTAlloc up to 2 kb
+         - Protected mode

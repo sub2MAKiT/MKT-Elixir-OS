@@ -29,7 +29,7 @@ MKTKERNEL equ 0x1000
 
 mov [BOOT_DISK], dl
 
-                                    
+
 xor ax, ax                          
 mov es, ax
 mov ds, ax
@@ -37,7 +37,7 @@ mov bp, 0x8000
 mov sp, bp
 
 mov bx, MKTKERNEL
-mov dh, 24
+mov dh, 3
 
 mov ah, 0x02
 mov al, dh 
