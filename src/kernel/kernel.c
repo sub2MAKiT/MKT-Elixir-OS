@@ -40,7 +40,7 @@ extern void MKTfree(void * ptr)
                 MKTRam[a-1] = MKTRam[a];
                 MKTRamSizeVariable[a-1] = MKTRamSizeVariable[a];
             }
-            vrmSize--;
+            *vrmSize--;
             return;
         }
     }

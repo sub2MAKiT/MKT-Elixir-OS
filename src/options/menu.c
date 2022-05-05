@@ -27,8 +27,6 @@ extern void drawMenu()
     char * testForMalloc = MKTalloc(1);
     *testForMalloc = 'W';
 
-
-
     for(int i = 0; i < 1000;i++)
     {
         *(char*)(0xb8000 + i*2) = mallocTest[i];
@@ -37,6 +35,9 @@ extern void drawMenu()
 
     *(char*)(0xb8000 + 2002) = *testForMalloc;
     *(char*)(0xb8000 + 2003) = 201;
+
+    MKTfree(testForMalloc);
+
     // magicCoolStringCosmicGenerator(&fileExplorerString, &offset,colorThemeLow);
 
 
